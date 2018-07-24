@@ -2,6 +2,7 @@ package main;
 
 import data.Jewelry;
 import data.ScriptOptions;
+import org.rspeer.ui.Log;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,7 @@ public class Gui extends JFrame {
     private JButton initiate;
     private Jewelry jewelry;
 
-    public Gui() {
+    Gui() {
         super("Config");
 
         setLayout(new FlowLayout());
@@ -22,7 +23,9 @@ public class Gui extends JFrame {
         initiate = new JButton("Start");
 
         initiate.addActionListener(e -> {
+            Log.info("Gui: setting jewelry");
             jewelry = (Jewelry) typeComboBox.getSelectedItem();
+            Log.info("Gui: " + jewelry.getJewelryName());
             setVisible(false);
         });
 
@@ -42,8 +45,10 @@ public class Gui extends JFrame {
 
     public ScriptOptions getOptions() {
         if (jewelry != null) {
+            Log.info("Gui: returned script options");
             return new ScriptOptions(jewelry);
         }
+        Log.info("Gui: returned null options");
         return null;
     }
 }
